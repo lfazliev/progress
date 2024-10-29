@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Progress Bar</title>
+  </head>
+  <body>
+    <section class="progressBarBlock">
+      <div class="round">
+        <div class="centerFill"></div>
+        <div class="progress"></div>
+      </div>
+      <div class="controls">
+        <div class="inputWrapper">
+          <input
+            type="number"
+            min="0"
+            max="100"
+            maxlength="3"
+            value="25"
+            name="value"
+            id="value"
+            oninput="this.value = Math.max(0, Math.min(this.value, 100))"
+          />
+          <span>Value</span>
+        </div>
+        <div class="inputWrapper">
+          <input
+            type="checkbox"
+            name="animated"
+            id="animated"
+            class="slideSwitcher"
+          />
+          <span>Animate</span>
+        </div>
+        <div class="inputWrapper">
+          <input
+            type="checkbox"
+            name="hidden"
+            id="hidden"
+            class="slideSwitcher"
+          />
+          <span>Hide</span>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
