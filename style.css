@@ -1,59 +1,67 @@
 body,
 input {
+  margin-block: 0;
+  margin-inline: 0;
+  padding-block: 0;
+  padding-inline: 0;
+
   font-family: "Open Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  padding-block: 0;
-  padding-inline: 0;
-  margin-block: 0;
-  margin-inline: 0;
 }
 
 @property --percent {
-  syntax: "<percentage>";
   inherits: false;
   initial-value: 25%;
+  syntax: "<percentage>";
 }
 
 @keyframes rotate360 {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
 input[type="number"] {
-  -moz-appearance: textfield;
+  appearance: textfield;
 }
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
   margin: 0;
+  appearance: none;
 }
 
-.progressBarBlock {
+.progress-bar-block {
   display: flex;
-  align-items: center;
   flex-direction: column;
-  margin: 5em;
   gap: 5em;
+  align-items: center;
+
+  margin: 5em;
 
   & .round {
-    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     width: 10em;
     height: 10em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 1em;
+
     background: conic-gradient(
       blue var(--percent),
-      rgb(230, 230, 230) var(--percent)
+      rgb(230 230 230) var(--percent)
     );
+    border-radius: 50%;
+
     transition: --percent 0.5s;
 
-    & .centerFill {
+    & .center-fill {
       width: 100%;
       height: 100%;
       background-color: white;
@@ -72,63 +80,74 @@ input[type="number"]::-webkit-inner-spin-button {
   & .controls {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
+    gap: 1em;
     align-items: center;
+
     font-size: 1.3em;
     font-weight: 600;
-    gap: 1em;
   }
 }
 
-.inputWrapper {
+.input-wrapper {
   display: flex;
-  align-items: center;
   gap: 1em;
+  align-items: center;
 
   & input[type="number"] {
+    box-sizing: border-box;
     width: 3.5rem;
     height: 2.5rem;
-    border: 2px black solid;
-    border-radius: 1.5rem;
     padding: 0.1rem;
-    text-align: center;
+
     font-size: 1em;
     font-weight: 600;
-    box-sizing: border-box;
+    text-align: center;
+
+    border: 2px black solid;
+    border-radius: 1.5rem;
   }
 }
 
-.slideSwitcher {
+.slide-switcher {
   position: relative;
   width: 3.5rem;
   height: 2.5rem;
   appearance: none;
 
   &::after {
-    box-sizing: border-box;
     content: "";
+
+    display: inline-block;
+
+    box-sizing: border-box;
     width: 3.5rem;
     height: 2.5rem;
-    border-radius: 1.3rem;
     padding: 0.3rem;
+
+    background-color: rgb(230 230 230);
+    border-radius: 1.3rem;
+  }
+
+  &::before {
+    content: "";
+
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+
     display: inline-block;
-    background-color: rgb(230, 230, 230);
+
+    width: 1.9rem;
+    height: 1.9rem;
+
+    background-color: white;
+    border-radius: 50%;
+
+    transition: left 0.3s ease;
   }
 
   &:checked::after {
     background-color: blue;
-  }
-
-  &::before {
-    position: absolute;
-    content: "";
-    width: 1.9rem;
-    height: 1.9rem;
-    top: 0.3rem;
-    left: 0.3rem;
-    border-radius: 50%;
-    display: inline-block;
-    background-color: white;
-    transition: left 0.3s ease;
   }
 
   &:checked::before {
@@ -136,23 +155,25 @@ input[type="number"]::-webkit-inner-spin-button {
   }
 }
 
-@media screen and (min-width: 640px) {
-  .progressBarBlock {
+@media screen and (width >= 640px) {
+  .progress-bar-block {
     flex-direction: row;
   }
 }
-@media screen and (min-width: 1024px) {
+
+@media screen and (width >= 1024px) {
   body {
     font-size: 20px;
   }
 
-  .inputWrapper {
+  .input-wrapper {
     & input[type="number"] {
       font-size: 0.8em;
     }
   }
 }
-@media screen and (min-width: 1280px) {
+
+@media screen and (width >= 1280px) {
   body {
     font-size: 22px;
   }

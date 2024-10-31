@@ -1,0 +1,15 @@
+{
+  "name": "progress-block",
+  "version": "1.0.1",
+  "description": "Блок Progress для мобильных web-приложений",
+  "main": "script.js",
+  "devDependencies": {
+    "stylelint": "^16.10.0",
+    "stylelint-config-clean-order": "^6.1.0",
+    "stylelint-config-recommended": "^14.0.1",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-order": "^6.0.4"
+  },
+  "author": "Lenar",
+  "license": "ISC"
+}
