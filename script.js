@@ -4,7 +4,9 @@ const hidden = document.getElementById("hidden");
 
 const setProgress = (e) => {
   const value = e.target.value;
-  document.querySelector(".round").style.setProperty("--percent", `${value}%`);
+  document
+    .querySelector(".round")
+    .style.setProperty("--percent-fill", `${value}%`);
 };
 const setVisibility = (e) => {
   console.log(1);
