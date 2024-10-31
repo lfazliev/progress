@@ -3,9 +3,10 @@ input {
   margin: 0;
   padding: 0;
 
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--font-family);
   font-optical-sizing: auto;
   font-style: normal;
+  color: var(--text-color);
 }
 
 @property --percent-fill {
@@ -31,6 +32,16 @@ input[type="number"]::-webkit-inner-spin-button {
   --gap-size: 5em;
   --font-size: 1.3em;
   --font-weight: 600;
+  --slider-switcher-transition-duration: 0.3s;
+  --round-change-transition-duration: 0.5s;
+  --round-revolution-transition-duration: 2s;
+  --slider-switcher-transition-timing-function: ease;
+  --text-color: rgb(0 0 0);
+  --font-family: "Open Sans", sans-serif;
+  --input-width: 3.5rem;
+  --input-height: 2.5rem;
+  --switch-circle-size: 1.9rem;
+  --switch-padding: 0.3rem;
 }
 
 .progress-bar-block {
@@ -44,7 +55,7 @@ input[type="number"]::-webkit-inner-spin-button {
   padding: 2em;
 }
 
-.progress-bar-block .round {
+.round {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,10 +70,10 @@ input[type="number"]::-webkit-inner-spin-button {
   );
   border-radius: 50%;
 
-  transition: --percent-fill 0.5s;
+  transition: --percent-fill --round-change-transition-duration;
 }
 
-.progress-bar-block .round .center-fill {
+.round .center-fill {
   width: 100%;
   height: 100%;
   background-color: white;
@@ -74,7 +85,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .round.animated {
-  animation: rotate360 2s cubic-bezier(0.5, 0.85, 0.7, 0.63) infinite;
+  animation: rotate360 --round-revolution-transition-duration
+    cubic-bezier(0.5, 0.85, 0.7, 0.63) infinite;
 }
 
 @keyframes rotate360 {
@@ -103,24 +115,25 @@ input[type="number"]::-webkit-inner-spin-button {
   align-items: center;
 }
 
-.input-wrapper input[type="number"] {
+.compact-input {
   box-sizing: border-box;
-  width: 3.5rem;
-  height: 2.5rem;
+  width: var(--input-width);
+  height: var(--input-height);
   padding: 0.1rem;
 
   font-size: 1em;
   font-weight: 600;
   text-align: center;
 
+  appearance: none;
   border: 2px solid black;
   border-radius: 1.5rem;
 }
 
 .slide-switcher {
   position: relative;
-  width: 3.5rem;
-  height: 2.5rem;
+  width: var(--input-width);
+  height: var(--input-height);
   appearance: none;
 }
 
@@ -130,9 +143,9 @@ input[type="number"]::-webkit-inner-spin-button {
   display: inline-block;
 
   box-sizing: border-box;
-  width: 3.5rem;
-  height: 2.5rem;
-  padding: 0.3rem;
+  width: var(--input-width);
+  height: var(--input-height);
+  padding: var(--switch-padding);
 
   background-color: var(--background-color);
   border-radius: 1.3rem;
@@ -142,16 +155,17 @@ input[type="number"]::-webkit-inner-spin-button {
   content: "";
 
   position: absolute;
-  top: 0.3rem;
-  left: 0.3rem;
+  top: var(--switch-padding);
+  left: var(--switch-padding);
 
-  width: 1.9rem;
-  height: 1.9rem;
+  width: var(--switch-circle-size);
+  height: var(--switch-circle-size);
 
   background-color: white;
   border-radius: 50%;
 
-  transition: left 0.3s ease;
+  transition: left var(--slider-switcher-transition-duration)
+    var(--slider-switcher-transition-timing-function);
 }
 
 .slide-switcher:checked::after {
@@ -159,7 +173,9 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .slide-switcher:checked::before {
-  left: calc(50% - 0.6em);
+  left: calc(
+    var(--input-width) - var(--switch-circle-size) - var(--switch-padding)
+  );
 }
 
 @media screen and (width >= 640px) {
@@ -170,16 +186,12 @@ input[type="number"]::-webkit-inner-spin-button {
 
 @media screen and (width >= 1024px) {
   body {
-    font-size: 20px;
-  }
-
-  .input-wrapper input[type="number"] {
-    font-size: 0.8em;
+    --font-size: 20px;
   }
 }
 
 @media screen and (width >= 1280px) {
   body {
-    font-size: 22px;
+    --font-size: 22px;
   }
 }
