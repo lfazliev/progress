@@ -1,0 +1,34 @@
+<section class="progress-bar-block" data-progress>
+  <div class="round">
+    <div class="center-fill"></div>
+  </div>
+  <div class="controls">
+    <div class="input-wrapper">
+      <input
+        class="compact-input"
+        type="number"
+        min="0"
+        max="100"
+        maxlength="3"
+        value="25"
+        name="value"
+        data-value
+        oninput="this.value = Math.max(0, Math.min(this.value, 100))"
+      />
+      <span>Value</span>
+    </div>
+    <div class="input-wrapper">
+      <input
+        type="checkbox"
+        name="animated"
+        data-animated
+        class="slide-switcher"
+      />
+      <span>Animate</span>
+    </div>
+    <div class="input-wrapper">
+      <input type="checkbox" name="hidden" data-hidden class="slide-switcher" />
+      <span>Hide</span>
+    </div>
+  </div>
+</section>

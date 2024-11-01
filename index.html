@@ -4,54 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="./progress/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
       rel="stylesheet"
     />
-    <title>Progress Bar</title>
+    <title>Progress App</title>
   </head>
   <body>
-    <section class="progress-bar-block">
-      <div class="round">
-        <div class="center-fill"></div>
-      </div>
-      <div class="controls">
-        <div class="input-wrapper">
-          <input
-            class="compact-input"
-            type="number"
-            min="0"
-            max="100"
-            maxlength="3"
-            value="25"
-            name="value"
-            id="value"
-            oninput="this.value = Math.max(0, Math.min(this.value, 100))"
-          />
-          <span>Value</span>
-        </div>
-        <div class="input-wrapper">
-          <input
-            type="checkbox"
-            name="animated"
-            id="animated"
-            class="slide-switcher"
-          />
-          <span>Animate</span>
-        </div>
-        <div class="input-wrapper">
-          <input
-            type="checkbox"
-            name="hidden"
-            id="hidden"
-            class="slide-switcher"
-          />
-          <span>Hide</span>
-        </div>
-      </div>
-    </section>
+    <div id="app"></div>
+
+    <!-- Подключение Progress.js как модуля -->
+    <script type="module">
+      import Progress from "./progress/script.js";
+
+      // Загрузка шаблона компонента и добавление его на страницу
+      fetch("./progress/index.html")
+        .then((response) => response.text())
+        .then((template) => {
+          document.getElementById("app").innerHTML = template;
+          document.querySelectorAll("[data-progress]").forEach((element) => {
+            new Progress(element);
+          });
+        });
+    </script>
   </body>
 </html>
