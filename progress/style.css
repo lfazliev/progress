@@ -14,25 +14,6 @@ input[type="number"]::-webkit-inner-spin-button {
   appearance: none;
 }
 
-:root {
-  --progress-color: blue;
-  --background-color: rgb(230 230 230);
-  --round-size: 10em;
-  --gap-size: 5em;
-  --controls-font-size: 1.3em;
-  --controls-font-weight: 600;
-  --slider-switcher-transition-duration: 0.3s;
-  --round-change-transition-duration: 0.5s;
-  --round-revolution-transition-duration: 2s;
-  --slider-switcher-transition-timing-function: ease;
-  --text-color: rgb(0 0 0);
-  --font-family: "Open Sans", sans-serif;
-  --input-width: 3.5rem;
-  --input-height: 2.5rem;
-  --switch-circle-size: 1.9rem;
-  --switch-padding: 0.3rem;
-}
-
 .progress-bar-block {
   display: flex;
   flex-direction: column;

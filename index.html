@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="./progress/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,21 +13,8 @@
     <title>Progress App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <progress-block></progress-block>
 
-    <!-- Подключение Progress.js как модуля -->
-    <script type="module">
-      import Progress from "./progress/script.js";
-
-      // Загрузка шаблона компонента и добавление его на страницу
-      fetch("./progress/index.html")
-        .then((response) => response.text())
-        .then((template) => {
-          document.getElementById("app").innerHTML = template;
-          document.querySelectorAll("[data-progress]").forEach((element) => {
-            new Progress(element);
-          });
-        });
-    </script>
+    <script src="./progress/script.js" type="module"></script>
   </body>
 </html>
