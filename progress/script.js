@@ -5,30 +5,39 @@ export default class Progress extends HTMLElement {
   }
 
   setProgress(value) {
-    this.roundElement.style.setProperty("--percent-fill", `${value}%`);
+    if (this.roundElement) {
+      this.roundElement.style.setProperty("--percent-fill", `${value}%`);
+    }
   }
 
   setVisibility(isHidden) {
-    this.roundElement.classList.toggle("hidden", isHidden);
+    if (this.roundElement) {
+      this.roundElement.classList.toggle("hidden", isHidden);
+    }
   }
 
   setAnimated(isAnimated) {
-    this.roundElement.classList.toggle("animated", isAnimated);
+    if (this.roundElement) {
+      this.roundElement.classList.toggle("animated", isAnimated);
+    }
   }
 
   connectedCallback() {
     const link = document.createElement("link");
     link.setAttribute("rel", "stylesheet");
-    link.setAttribute("href", "/progress/style.css");
+    link.setAttribute("href", "./progress/style.css");
     this.shadowRoot.appendChild(link);
 
-    fetch("/progress/index.html")
+    fetch("./progress/progress/index.html")
       .then((response) => response.text())
       .then((html) => {
         const template = document.createElement("template");
         template.innerHTML = html;
         this.shadowRoot.appendChild(template.content.cloneNode(true));
         this.initComponent();
+      })
+      .catch((error) => {
+        console.error("Ошибка загрузки шаблона компонента:", error);
       });
   }
 
@@ -38,19 +47,35 @@ export default class Progress extends HTMLElement {
     this.hiddenCheckbox = this.shadowRoot.querySelector("[data-hidden]");
     this.roundElement = this.shadowRoot.querySelector(".round");
 
-    this.setProgress(this.valueInput.value);
-    this.setAnimated(this.animatedCheckbox.checked);
-    this.setVisibility(this.hiddenCheckbox.checked);
+    if (this.valueInput && this.roundElement) {
+      this.setProgress(this.valueInput.value);
+    }
 
-    this.valueInput.addEventListener("input", (e) =>
-      this.setProgress(e.target.value),
-    );
-    this.animatedCheckbox.addEventListener("input", (e) =>
-      this.setAnimated(e.target.checked),
-    );
-    this.hiddenCheckbox.addEventListener("input", (e) =>
-      this.setVisibility(e.target.checked),
-    );
+    if (this.animatedCheckbox && this.roundElement) {
+      this.setAnimated(this.animatedCheckbox.checked);
+    }
+
+    if (this.hiddenCheckbox && this.roundElement) {
+      this.setVisibility(this.hiddenCheckbox.checked);
+    }
+
+    if (this.valueInput) {
+      this.valueInput.addEventListener("input", (e) =>
+        this.setProgress(e.target.value)
+      );
+    }
+
+    if (this.animatedCheckbox) {
+      this.animatedCheckbox.addEventListener("input", (e) =>
+        this.setAnimated(e.target.checked)
+      );
+    }
+
+    if (this.hiddenCheckbox) {
+      this.hiddenCheckbox.addEventListener("input", (e) =>
+        this.setVisibility(e.target.checked)
+      );
+    }
   }
 }
 
