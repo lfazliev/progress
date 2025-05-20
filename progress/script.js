@@ -25,10 +25,10 @@ export default class Progress extends HTMLElement {
   connectedCallback() {
     const link = document.createElement("link");
     link.setAttribute("rel", "stylesheet");
-    link.setAttribute("href", "./progress/style.css");
+    link.setAttribute("href", "/progress/style.css");
     this.shadowRoot.appendChild(link);
 
-    fetch("./progress/progress/index.html")
+    fetch("/progress/progress.html")
       .then((response) => response.text())
       .then((html) => {
         const template = document.createElement("template");
