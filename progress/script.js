@@ -4,6 +4,18 @@ export default class Progress extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
+  getBasePath() {
+    try {
+      const scriptURL = new URL(import.meta.url);
+      const pathParts = scriptURL.pathname.split("/");
+      pathParts.pop();
+      return pathParts.join("/");
+    } catch (e) {
+      const pathMatch = window.location.pathname.match(/^(\/[^\/]+)/);
+      return pathMatch ? pathMatch[0] : "";
+    }
+  }
+
   setProgress(value) {
     if (this.roundElement) {
       this.roundElement.style.setProperty("--percent-fill", `${value}%`);
@@ -25,10 +37,12 @@ export default class Progress extends HTMLElement {
   connectedCallback() {
     const link = document.createElement("link");
     link.setAttribute("rel", "stylesheet");
-    link.setAttribute("href", "/progress/style.css");
+
+    const basePath = this.getBasePath();
+    link.setAttribute("href", `${basePath}/style.css`);
     this.shadowRoot.appendChild(link);
 
-    fetch("/progress/progress.html")
+    fetch(`${basePath}/progress.html`)
       .then((response) => response.text())
       .then((html) => {
         const template = document.createElement("template");
